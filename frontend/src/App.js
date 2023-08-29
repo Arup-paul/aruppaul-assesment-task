@@ -1,18 +1,21 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import './App.css';
-import Login from "./pages/login";
-import {Routes,Route,Link} from "react-router-dom";
-import Home from "./pages/Home";
+import AuthUser from "./Components/AuthUser";
 import Layout from "./Components/Layout";
+import GuestLayout from "./Components/GuestLayout";
+
 
 function App() {
-    return (
-        <Routes>
-            <Route path="/" element={<Layout><Home /></Layout>} />
-            <Route path="/login" element={<Layout><Login /> </Layout>} />
-        </Routes>
-    )
+   const {getToken} = AuthUser();
+
+   if(getToken()){
+       return  <Layout />
+   }
+
+    return <GuestLayout />
+
+
 }
 
 export default App;

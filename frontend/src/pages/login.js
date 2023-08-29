@@ -1,17 +1,30 @@
 import React, {useState} from 'react';
+import AuthUser from "../Components/AuthUser";
+import {useNavigate} from "react-router-dom";
 
 const Login = () => {
+    const navigate = useNavigate();
+    const {http,setToken} = AuthUser();
+
+
     const [email,setEmail] = useState();
     const [password,setPassword] = useState()
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
-        console.log(email,password)
+        http.post('/login',{
+            email: email,
+            password: password
+        }).then(res => {
+            console.log(res.data);
+            setToken(res.data.user,res.data.access_token)
+        }).catch(err => {
+            console.log(err);
+        })
     }
     return (
     <>
-        <div className="login-body  ">
+        <div className="main-body ">
         <div className="login-container">
             <h2 className="mb-4">Login</h2>
             <form onSubmit={handleSubmit}>

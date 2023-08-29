@@ -1,21 +1,11 @@
 import React from 'react';
 import {Link, Route, Routes} from "react-router-dom";
-import GuestLayout from "./GuestLayout";
 import Home from "../pages/Home";
 import Login from "../pages/login";
+import Layout from "./Layout";
 import Dashboard from "../pages/Dashboard";
-import AuthUser from "./AuthUser";
 
-const Layout = () => {
-    const {token,logout} = AuthUser();
-
-
-    const handleLogout = () => {
-         window.confirm("Are you sure you want to logout?")
-             if(token !== undefined){
-                    logout();
-             }
-    }
+const GuestLayout = () => {
 
     return (
         <div>
@@ -27,14 +17,11 @@ const Layout = () => {
                             <li className="nav-item active">
                                 <Link to='/' className="nav-link" href="#">Home</Link>
                             </li>
-
-                            <li className="nav-item active">
-                                <Link to='/dashboard' className="nav-link" href="#">Dashboard</Link>
+                            <li className="nav-item">
+                                <Link to='/login'  className="nav-link" href="#">Login </Link>
                             </li>
-
-
-                            <li className="nav-item active">
-                                <span className="nav-link" onClick={handleLogout}>Logout</span>
+                            <li className="nav-item">
+                                <a className="nav-link" href="#">Register</a>
                             </li>
 
                         </ul>
@@ -43,10 +30,11 @@ const Layout = () => {
             </nav>
 
             <Routes>
-                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/" element={ <Home /> } />
+                <Route path="/login" element={ <Login />  } />
             </Routes>
         </div>
     );
 };
 
-export default Layout;
+export default GuestLayout;

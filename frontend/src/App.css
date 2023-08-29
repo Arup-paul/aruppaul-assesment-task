@@ -1,7 +1,7 @@
 body {
   background-color: #f8f9fa;
 }
-.login-body{
+.main-body{
   background-color: #f8f9fa;
   display: flex;
   justify-content: center;
@@ -42,4 +42,12 @@ body {
 
 .feature-title {
   font-size: 24px;
+}
+
+.user-info-container {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  width: 400px;
 }
