@@ -1,0 +1,45 @@
+body {
+  background-color: #f8f9fa;
+}
+.login-body{
+  background-color: #f8f9fa;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  margin: 0;
+}
+.login-container {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  width: 350px;
+}
+
+.navbar-nav-center {
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.navbar {
+  background-color: #343a40;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  color: white;
+}
+
+.jumbotron {
+  color: #000;
+  padding: 100px;
+}
+
+.feature-icon {
+  font-size: 48px;
+}
+
+.feature-title {
+  font-size: 24px;
+}
