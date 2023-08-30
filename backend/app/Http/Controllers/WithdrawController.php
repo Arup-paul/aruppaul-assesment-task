@@ -49,34 +49,36 @@ class WithdrawController extends Controller
                     $freeMonthlyWithdrawalLimit = 5000; // First $5,000 per month is free from fee
                     $individualFeeRate = 0.015;
 
-                    if ($withdrawalAmount > $firstFreeAmount) {
+                    if($withdrawalAmount <= $firstFreeAmount) {
+                        $withdrawalFee = 0;
+                    }else {
                         $withdrawalFee = (($withdrawalAmount - $firstFreeAmount) * $individualFeeRate) / 100;
-                    }
 
-                    // 5k free withdrawal limit per month
-                    $totalCurrentMonthWithDraw =   Transaction::where('user_id', $authUser->id)
-                        ->where('type', TransactionType::WITHDRAWAL)
-                        ->whereMonth('date', Carbon::now()->month)
-                        ->sum('amount');
+                        // 5k free withdrawal limit per month
+                        $totalCurrentMonthWithDraw = Transaction::where('user_id', $authUser->id)
+                            ->where('type', TransactionType::WITHDRAWAL)
+                            ->whereMonth('date', Carbon::now()->month)
+                            ->sum('amount');
 
-                    $remainingFreeAmount = 0;
-                    if($totalCurrentMonthWithDraw > $freeMonthlyWithdrawalLimit) {
                         $remainingFreeAmount = 0;
-                    }else{
-                        $remainingFreeAmount = $freeMonthlyWithdrawalLimit - $totalCurrentMonthWithDraw;
-                    }
+                        if ($totalCurrentMonthWithDraw > $freeMonthlyWithdrawalLimit) {
+                            $remainingFreeAmount = 0;
+                        } else {
+                            $remainingFreeAmount = $freeMonthlyWithdrawalLimit - $totalCurrentMonthWithDraw;
+                        }
 
-                    if ($withdrawalAmount > $remainingFreeAmount) {
-                        $withdrawalAmount = $withdrawalAmount - ($remainingFreeAmount + $firstFreeAmount);
+                        if ($withdrawalAmount > $remainingFreeAmount) {
+                            $withdrawalAmount = $withdrawalAmount - ($remainingFreeAmount + $firstFreeAmount);
 
-                        $withdrawalFee = ($withdrawalAmount * $individualFeeRate) / 100;
-                    } else{
-                        $withdrawalFee = 0;
-                    }
+                            $withdrawalFee = ($withdrawalAmount * $individualFeeRate) / 100;
+                        } else {
+                            $withdrawalFee = 0;
+                        }
 
-                    // Apply fee logic for Friday withdrawals
-                    if (Carbon::now()->isFriday()) {
-                        $withdrawalFee = 0;
+                        // Apply fee logic for Friday withdrawals
+                        if (Carbon::now()->isFriday()) {
+                            $withdrawalFee = 0;
+                        }
                     }
 
                 }elseif ($authUser->account_type ==  AccountType::BUSINESS) {
@@ -96,8 +98,9 @@ class WithdrawController extends Controller
                     return response()->json([
                         'success' => false,
                         'message' => 'Insufficient balance'
-                    ],400);
+                    ],402);
                 }
+
 
 
                 $data['user_id'] = auth()->id();
