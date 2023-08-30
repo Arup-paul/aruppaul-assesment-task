@@ -31,6 +31,7 @@ const Login = () => {
             navigate('/login')
         }).catch(err => {
             const response = err.response;
+            console.log(response)
             if (response && response.status === 422) {
                 if (response.data?.errors) {
                     const errors = response.data.errors;
