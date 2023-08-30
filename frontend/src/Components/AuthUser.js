@@ -29,7 +29,7 @@ const AuthUser = () => {
     }
 
     const http  = axios.create({
-        baseURL: "http://localhost:8000/api",
+        baseURL: `${process.env.REACT_APP_BASE_URL}api`,
         headers: {
             "Content-type": "application/json"
         }

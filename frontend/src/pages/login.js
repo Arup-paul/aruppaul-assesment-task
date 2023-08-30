@@ -12,6 +12,7 @@ const Login = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
         http.post('/login',{
             email: email,
             password: password
