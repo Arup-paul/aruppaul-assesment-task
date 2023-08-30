@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DepositController;
+use App\Http\Controllers\WithdrawController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -26,4 +27,8 @@ use Illuminate\Support\Facades\Route;
         //deposit
         Route::get('deposit', [DepositController::class, 'index']);
         Route::post('deposit', [DepositController::class, 'store']);
+
+        //withdraw controller
+        Route::get('withdraw', [WithdrawController::class, 'index']);
+        Route::post('withdraw', [WithdrawController::class, 'store']);
     });

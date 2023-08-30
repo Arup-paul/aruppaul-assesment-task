@@ -45,13 +45,13 @@ class DepositController extends Controller
                 return response()->json([
                     'success' => true,
                     'message' => 'Deposit Created Successfully'
-                ]);
+                ],201);
             });
         }catch (\Throwable $th) {
             return response()->json([
                 'success' => false,
                 'message' => 'Something went wrong'
-            ]);
+            ],500);
         }
     }
 }
