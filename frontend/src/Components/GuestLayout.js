@@ -4,6 +4,7 @@ import Home from "../pages/Home";
 import Login from "../pages/login";
 import Layout from "./Layout";
 import Dashboard from "../pages/Dashboard";
+import Register from "../pages/Register";
 
 const GuestLayout = () => {
 
@@ -21,7 +22,7 @@ const GuestLayout = () => {
                                 <Link to='/login'  className="nav-link" href="#">Login </Link>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="#">Register</a>
+                                <Link to="/register" className="nav-link" href="#">Register</Link>
                             </li>
 
                         </ul>
@@ -32,6 +33,7 @@ const GuestLayout = () => {
             <Routes>
                 <Route path="/" element={ <Home /> } />
                 <Route path="/login" element={ <Login />  } />
+                <Route path="/register" element={ <Register />  } />
             </Routes>
         </div>
     );
