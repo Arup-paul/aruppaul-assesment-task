@@ -5,6 +5,8 @@ import Home from "../pages/Home";
 import Login from "../pages/login";
 import Dashboard from "../pages/Dashboard";
 import AuthUser from "./AuthUser";
+import Deposit from "../pages/deposit";
+import DepositCreate from "../pages/deposit/create";
 
 const Layout = () => {
     const {token,logout} = AuthUser();
@@ -32,6 +34,10 @@ const Layout = () => {
                                 <Link to='/dashboard' className="nav-link" href="#">Dashboard</Link>
                             </li>
 
+                            <li className="nav-item active">
+                                <Link to='/deposit' className="nav-link" href="#">Deposit</Link>
+                            </li>
+
 
                             <li className="nav-item active">
                                 <span className="nav-link" onClick={handleLogout}>Logout</span>
@@ -44,6 +50,8 @@ const Layout = () => {
 
             <Routes>
                 <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/deposit" element={<Deposit />} />
+                <Route path="/deposit/create" element={<DepositCreate />} />
             </Routes>
         </div>
     );

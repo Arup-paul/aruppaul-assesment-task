@@ -6,6 +6,9 @@ const Dashboard = () => {
     const {user} = AuthUser();
 
 
+    console.log(user)
+
+
     return (
         <div className="main-body">
         <div className="user-info-container">
